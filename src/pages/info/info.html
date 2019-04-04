@@ -1,0 +1,84 @@
+<!--
+  Generated template for the InfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Información
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-slides pager>
+    <ion-slide *ngFor="let imagen of casa.imagenes">
+      <img src='{{imagen}}'>
+    </ion-slide>
+  </ion-slides>
+  
+  <ion-card *ngIf="casa.hasOwnProperty('descripcion')">
+    <ion-card-header>
+      Descripción
+    </ion-card-header>
+    <ion-card-content>
+      {{casa.descripcion}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="casa.hasOwnProperty('precio')">
+    <ion-card-header>
+      Precio
+    </ion-card-header>
+    <ion-card-content>
+      {{casa.precio}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="casa.hasOwnProperty('colonia')">
+    <ion-card-header>
+      Municipio, Colonia
+    </ion-card-header>
+    <ion-card-content>
+        {{ casa.municipio }}, {{casa.colonia}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="casa.hasOwnProperty('rooms')">
+      <ion-card-header>
+        Recamáras
+      </ion-card-header>
+      <ion-card-content>
+          {{ casa.rooms }}
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="casa.hasOwnProperty('baths')">
+      <ion-card-header>
+        Baños
+      </ion-card-header>
+      <ion-card-content>
+          {{ casa.baths }}
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="casa.hasOwnProperty('m2')">
+      <ion-card-header>
+        Metros cuadrados
+      </ion-card-header>
+      <ion-card-content>
+          {{ casa.m2 }}
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="casa.hasOwnProperty('cars')">
+      <ion-card-header>
+        Lugares de estacionamiento
+      </ion-card-header>
+      <ion-card-content>
+          {{ casa.cars }}
+      </ion-card-content>
+    </ion-card>
+</ion-content>

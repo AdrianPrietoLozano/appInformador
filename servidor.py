@@ -13,11 +13,19 @@ cursor = conexion.cursor()
 
 @app.route("/api/v1/casas/")
 def hello():
-    query = "SELECT * FROM bienraiz"
+    query = "SELECT bienraiz.id, titulo, precio, m2, rooms, baths, cars, " \
+    "descripcion, colonia.nombre, municipio.nombre FROM bienraiz " \
+    "LEFT JOIN colonia ON bienraiz.id_colonia = colonia.id " \
+    "LEFT JOIN municipio ON municipio.id = colonia.id_municipio ORDER BY precio DESC"
+
+    q_imagenes = "SELECT ubicacion FROM imagen WHERE id_bienraiz=%s"
+
     cursor.execute(query)
     casas = cursor.fetchall()
     lista_casas = []
     for casa in casas:
+        cursor.execute(q_imagenes, (casa[0], ))
+        imagenes = cursor.fetchall()
         c = {
             "id": casa[0],
             "titulo": casa[1],
@@ -26,7 +34,10 @@ def hello():
             "rooms": casa[4],
             "baths": casa[5],
             "cars": casa[6],
-            "descripcion": casa[7]
+            "descripcion": casa[7],
+            "colonia": casa[8],
+            "imagenes": imagenes,
+            "municipio": casa[9]
         }
         lista_casas.append(c)
     return jsonify(lista_casas)

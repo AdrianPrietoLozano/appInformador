@@ -1,14 +1,26 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Bienes Raíces
     </ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="search()">
+        <ion-icon name="search"></ion-icon>
+      </button>>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card *ngFor="let casa of casas" (click)="info(casa)">
+    <!-- {{ nombre | json }} -->
+    <img *ngIf="casa.hasOwnProperty('imagenes')" src='{{ casa.imagenes[0] }}'>
+    <ion-card-header *ngIf="casa.hasOwnProperty('titulo')">
+      {{ casa.titulo }}
+    </ion-card-header>
+    <ion-card-content *ngIf="casa.hasOwnProperty('municipio')">
+      Precio:  {{ casa.precio }} <br>
+      Municipio:  {{ casa.municipio }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
